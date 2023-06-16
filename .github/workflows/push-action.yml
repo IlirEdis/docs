@@ -27,4 +27,4 @@ jobs:
           git config --global user.name "IlirEdis"
           git add --all
           git commit -m "Update submodules" || echo "No changes to commit"
-          git push edisOrigin main
+          git push https://github.com/IlirEdis/docs main
