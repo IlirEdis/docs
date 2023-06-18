@@ -1,0 +1,9 @@
+## AutoInstall / reinstall a VPS with a fresh OS
+
+To reinstall your VPS with a fresh OS, follow these easy steps below:
+
+ 1. Login to your KVM panel at https://manage.edis.at/whmcs/clientarea.php
+ 2. Locate your VPS in the services tab
+ 3. Reinstall your VPS "AutoInstall OS" with a fresh password and the OS of your liking
+
+![reinstall vps, autoinstall vps](https://glorious-snazzy-hot.media.strapiapp.com/reinstall_autoinstall_vps_edisglobal_9f06aea51c.gif)
