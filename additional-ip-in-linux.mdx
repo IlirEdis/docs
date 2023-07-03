@@ -20,7 +20,7 @@ you want to add the secondary IP of 192.168.1.2 as follows
 
     auto eth0 iface eth0 inet static   address 192.168.1.1   netmask 255.255.255.0   gateway 192.168.1.254 post-up ip a a 192.168.1.2/24 dev eth0 pre-down ip a d 192.168.1.2/24 dev eth0
 
-After editing, run the command **sudo ifup eth0:0** to activate the new interface.
+After editing, run the command `sudo ifup eth0:0` to activate the new interface.
 
 #### Adding an IP address in CentOS
 
