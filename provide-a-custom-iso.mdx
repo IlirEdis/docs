@@ -1,0 +1,23 @@
+---
+title: "Providing a custom ISO image"
+description: >
+  Description
+---
+
+#### **EDIS allows you to bring and install your own .ISO**
+
+Boot up a bare-metal backup of any server on your KVM. You can also provide custom distributions. Any i386 or AMD64 compatible operating systems can be run on your KVM.
+
+Use your own custom ISO file to manually install your VPS from the KVM management panel.
+
+Getting ready:
+
+1.  Upload your .iso file to a web server. EDIS requires a valid download URL from where we can fetch the file for you.
+2.  Locate your VPS in the [services](http://manage.edis.at/whmcs/clientarea.php?action=services) menu and then click on "**Custom ISO**".
+3.  Enter the download URL and proceed accordingly.
+
+Once the download is completed, your .iso will be available and can be mounted from the "Mount ISO" dialogue. Please pay particular attention to the fact that the uploaded file changes its name and will be provided to you as **xxxx/iso/KVM_xxxxx_xxxxxx.iso.**
+
+<div class="note-callout">A custom ISO will be available for 24 hours and will then be removed again.</div>
+
+<figure>![Use a custom .iso image](https://files.helpdocs.io/099fp42b3r/articles/pfk3r1i7nh/1664891407848/kvm-custom-iso.png)</figure>

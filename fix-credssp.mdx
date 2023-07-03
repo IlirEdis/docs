@@ -1,0 +1,22 @@
+---
+title: "Fix CredSSP Error"
+description: >
+  Description
+---
+
+#### FIX CredSSPEncryption Oracle Remediation Error in Windows 10 Home Edition
+
+<figure>![](https://files.helpdocs.io/099fp42b3r/articles/v81cl91azt/1678659183824/image.png)</figure>
+
+This is how you get rid of the **CredSSP****Encryption Oracle Remediation** Error in Windows 10 Home Edition
+
+1.  Type **cmd** in the search bar of your Windows 10
+2.  Right click on **cmd** and "run as Administrator"
+3.  Copy/paste the following code and confirm with Enter
+```
+REG ADD HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters\ /v AllowEncryptionOracle /t REG_DWORD /d 2
+```
+
+1.  Reboot. After the reboot, RDP connection should be easy to establish.
+
+> An authentication error has occurred. The function requested is not supported. Remote computer: *IP or name of computer*. This could be due to CredSSP encryption oracle remediation. For more information, see https://go.microsoft.com/fwlink/?linkid=866660.
