@@ -3,16 +3,17 @@ title: "Adding aditional IP in Linux VPS"
 description: >
   How to add aditional IP address in your Linux VPS
 ---
-If you obtained an additional IP address for your KVM, it will not be added to your server's network settings automatically. You have to manually configure the IP address in your operating system's network configuration. Before you add or update any IP addresses on your VPS, make sure to restart your service (reboot). Doing so updates the ethernet bridge's firewall and allows your VPS to communicate with the internet.  
 
-A clean reinstall configures all IP addresses automatically, but all data on your KVM will be erased.  
+If you obtained an additional IP address for your KVM, it will not be added to your server's network settings automatically. You have to manually configure the IP address in your operating system's network configuration. Before you add or update any IP addresses on your VPS, make sure to restart your service (reboot). Doing so updates the ethernet bridge's firewall and allows your VPS to communicate with the internet.
+
+A clean reinstall configures all IP addresses automatically, but all data on your KVM will be erased.
 
 Below are instructions on how to add a secondary IP address to your KVM.
 
 #### Adding an IP address in Debian Linux or Ubuntu
 
 On your server with primary IP 192.168.1.1 on eth0  
-you want to add the secondary IP of 192.168.1.2 as follows  
+you want to add the secondary IP of 192.168.1.2 as follows
 
 **edit** /etc/network/interfaces and  
 **add** the following 2 lines at the end of your config:
@@ -24,24 +25,29 @@ After editing, run the command **sudo ifup eth0:0** to activate the new interfac
 #### Adding an IP address in CentOS
 
 On your server with primary IP 192.168.1.1 on eth0  
-you want to add the secondary IP of 192.168.1.2 as follows  
+you want to add the secondary IP of 192.168.1.2 as follows
 
 Log in as user root and navigate to your **/etc/sysconfig/network-scripts** directory.  
-In this folder you find your network interface config file(s).  
+In this folder you find your network interface config file(s).
 
-    # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0
+```bash
+ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0
+```
 
 Clone (copy) the primary adapter configuration file _ifcfg-eth0_ and  
 name it after the first virtual adapter _ifcfg-eth0:0_
 
-    # cp ifcfg-eth0 ifcfg-eth0:0 # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0 -rw-r--r-- 1 root root 119 Feb 24 08:53 ifcfg-eth0:0
+```bash
+cp ifcfg-eth0 ifcfg-eth0:0
+ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0 -rw-r--r-- 1 root root 119 Feb 24 08:53 ifcfg-eth0:0
+```
 
-**edit** the file ifcfg-eth0:0, and use the following configuration for this virtual adapter.  
+**edit** the file ifcfg-eth0:0, and use the following configuration for this virtual adapter.
 
 static IP  
 remove hardware address (MAC)  
 configure the IP address and netmask  
-rename the device from eth0 to eth0:0  
+rename the device from eth0 to eth0:0
 
     DEVICE=eth0:0 BOOTPROTO=static ONBOOT=yes IPADDR=192.168.1.2 NETMASK=255.255.255.0
 
