@@ -33,21 +33,20 @@ you want to add the secondary IP of 192.168.1.2 as follows
 Log in as user root and navigate to your **/etc/sysconfig/network-scripts** directory.  
 In this folder you find your network interface config file(s).  
 ```bash
-    # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0
+ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0
 ```
 Clone (copy) the primary adapter configuration file _ifcfg-eth0_ and  
 name it after the first virtual adapter _ifcfg-eth0:0_
-
-    # cp ifcfg-eth0 ifcfg-eth0:0 # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0 -rw-r--r-- 1 root root 119 Feb 24 08:53 ifcfg-eth0:0
-
+```bash
+cp ifcfg-eth0 ifcfg-eth0:0 # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0 -rw-r--r-- 1 root root 119 Feb 24 08:53 ifcfg-eth0:0
+```
 **edit** the file ifcfg-eth0:0, and use the following configuration for this virtual adapter.  
-
+```
 static IP  
 remove hardware address (MAC)  
 configure the IP address and netmask  
 rename the device from eth0 to eth0:0  
-
-    DEVICE=eth0:0 BOOTPROTO=static ONBOOT=yes IPADDR=192.168.1.2 NETMASK=255.255.255.0
-
+DEVICE=eth0:0 BOOTPROTO=static ONBOOT=yes IPADDR=192.168.1.2 NETMASK=255.255.255.0
+```
 After editing you will have to restart the networking service  
 with the command **service network restart**
