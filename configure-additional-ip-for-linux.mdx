@@ -15,7 +15,10 @@ Below are instructions on how to add a secondary IP address to your KVM.
 On your server with primary IP 192.168.1.1 on eth0  
 you want to add the secondary IP of 192.168.1.2 as follows  
 
-**edit** /etc/network/interfaces and  
+**edit** /etc/network/interfaces
+```bash
+nano /etc/network/interfaces
+```
 **add** the following 2 lines at the end of your config:
 
     auto eth0 iface eth0 inet static   address 192.168.1.1   netmask 255.255.255.0   gateway 192.168.1.254 post-up ip a a 192.168.1.2/24 dev eth0 pre-down ip a d 192.168.1.2/24 dev eth0
@@ -29,9 +32,9 @@ you want to add the secondary IP of 192.168.1.2 as follows
 
 Log in as user root and navigate to your **/etc/sysconfig/network-scripts** directory.  
 In this folder you find your network interface config file(s).  
-
+```bash
     # ls -l | grep ifcfg-eth -rw-r--r-- 1 root root 119 Jan 11 19:16 ifcfg-eth0
-
+```
 Clone (copy) the primary adapter configuration file _ifcfg-eth0_ and  
 name it after the first virtual adapter _ifcfg-eth0:0_
 
