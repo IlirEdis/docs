@@ -1,0 +1,84 @@
+---
+title: "Basics of SSH connection"
+description: >
+  Basic steps you can take to optimize SSH security
+---
+
+### Here are some basic steps you can take to optimize SSH security:
+
+*   Change the default SSH port: This can help to reduce the number of automated attacks as attackers are often targeting systems that are running SSH on the default port 22.
+*   Disable SSH root access: This can help to reduce the risk of unauthorized access to your system as attackers often target the root account. Instead, create a separate user with sudo privileges.
+*   Use strong SSH key-based authentication: Use a strong password and consider using public key-based authentication instead of simple password authentication. This provides an extra layer of security in that an attacker would need to possess the private key to gain access, which is much more difficult to obtain than a simple password.
+*   Limit the number of authentication attempts: Use an authentication method that limits the number of failed login attempts, such as fail2ban. This can help prevent brute-force attacks.
+*   Keep software up-to-date: Make sure that both the SSH server and client software is up-to-date and has all security patches applied.
+
+### Lets start implementing them:
+
+##### Change the default SSH port:
+
+Open the SSH configuration file using a text editor:
+```bash
+sudo nano /etc/ssh/sshd_config  
+```
+Find the line that says #Port 22 and uncomment it or change the port number to your desired port, for example, Port 2222. Save the file and exit. Restart the SSH service:
+```bash
+sudo service sshd restart
+```
+##### Disable SSH root access:
+
+Open the SSH configuration file:
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+Find the line that says **PermitRootLogin** yes and change it to:
+
+PermitRootLogin no  
+
+Save the file and exit.Restart the SSH service:
+```bash
+sudo service sshd restart
+```
+##### Use strong SSH key-based authentication:
+
+Generate an SSH key pair on your local machine: 
+```bash
+ssh-keygen -o -a 100 -t ed25519
+```
+Copy the public key to the remote server, Replace _user_ with your username and _server\_ip_ with your server's IP address.
+```bash
+ssh-copy-id user@server_ip
+```
+Disable password authentication by editing the SSH configuration file: 
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+Set PasswordAuthentication no
+
+Restart the SSH service:
+```bash
+sudo service sshd restart
+```
+#### Limit the number of authentication attempts:
+
+*   Install "fail2ban": 
+```bash
+sudo apt-get install fail2ban
+```
+Configure fail2ban to monitor the SSH service: 
+```bash
+sudo nano /etc/fail2ban/jail.local
+```
+Add the following lines under \[sshd\]:
+```
+enabled = true  
+port = 2222 # Assuming this is the port you assigned to sshd   
+filter = sshd  
+maxretry = 3
+```
+##### Keep your server up to date.
+
+Make it a habit of keeping and performing on a regular basis updates to your server. You can do this by typing:
+```bash
+sudo apt update && sudo apt upgrade
+```
+By following these steps, your SSH connection will be more secure and resistant to unauthorized access.
